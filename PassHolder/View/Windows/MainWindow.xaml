@@ -1,0 +1,137 @@
+﻿<Window x:Class="PassHolder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:convert="clr-namespace:PassHolder.Converters"
+        xmlns:vm="clr-namespace:PassHolder.ViewModel"
+        xmlns:local="clr-namespace:PassHolder"
+        mc:Ignorable="d"
+        x:Name="MainAppWindow"
+        Title="{Binding Title}" Height="550" Width="800" MinHeight="550" MinWidth="800"
+        WindowStartupLocation="CenterScreen" Visibility="{Binding Visible}"
+        WindowStyle="None"  ResizeMode="CanResizeWithGrip" AllowsTransparency="True"
+        ShowInTaskbar="True" FontSize="{Binding BaseFontSize}"
+        Background="{StaticResource Base.Background.Color}"
+        Foreground="{StaticResource Base.Foreground.Color}"
+        Closed="Window_Closed" 
+        MouseLeftButtonDown="MainAppWindow_MouseLeftButtonDown">
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+
+        <convert:FontSizeConverter x:Key="FontSizeConverter"/>
+
+        <!--<vm:MainWindowViewModel x:Key="MainWindowViewModel"/>-->
+
+        <FrameworkElement x:Key="ProxyContext"
+                          DataContext="{Binding Path=DataContext, 
+            RelativeSource={RelativeSource Self}}">
+
+        </FrameworkElement>
+
+        <Style x:Key="BaseStyle" TargetType="{x:Type Control}">
+            <Setter Property="FontSize" Value="{Binding RelativeSource={RelativeSource 
+                AncestorType={x:Type FrameworkElement}, 
+                Mode=FindAncestor}, Path=FontSize}"/>
+        </Style>
+
+
+    </Window.Resources>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding EventLoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
+    <Grid>
+        <DockPanel>
+            <!--#region-->
+            <!--#endregion-->
+
+            <!--#region Top Menu-->
+            <Grid x:Name="TopMenu" Height="40" 
+                  DockPanel.Dock="Top"
+                  Background="#FF161D23"
+                  >
+                <Border BorderThickness="0 0 0 1" BorderBrush="#2F3644">
+                    <Grid>
+                        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                            <TextBlock Text="{Binding ElementName=MainAppWindow, Path=Title}" Width="200"
+                                       Margin="10 5"/>
+
+                            <Grid x:Name="MainTopMenu" HorizontalAlignment="Left" Width="100">
+                                <Button x:Name="MenuIcon" Style="{StaticResource ButtonStyle}"
+                                    Width="35" Height="35" VerticalAlignment="Top"
+                                    HorizontalAlignment="Left" Margin="5 2"
+                                    Cursor="Hand" Command="{Binding ShowMenuBtnCommand}">
+                                    <Image Width="30" Height="30" 
+                                       Source="{StaticResource main_menu_icon}"/>
+                                </Button>
+                            </Grid>
+                        </StackPanel>
+
+
+                        <StackPanel HorizontalAlignment="Right" 
+                                    Orientation="Horizontal" 
+                                    FlowDirection="RightToLeft">
+                            <Button x:Name="SysCloseBtn" Style="{StaticResource ButtonStyle}"
+                                    Background="Transparent" Height="25" Width="25" 
+                                    HorizontalAlignment="Right" Margin="10 0 5 0"
+                                    Cursor="Hand" ToolTip="Close"
+                                    Command="{Binding CloseApp}" >
+                                <Image Source="{StaticResource closeIcon}"/>
+                            </Button>
+                            <Button x:Name="SysMinBtn" Style="{StaticResource ButtonStyle}"
+                                    Background="Transparent" Height="25" Width="25" 
+                                    HorizontalAlignment="Right" Margin="10 0 5 0"
+                                    Cursor="Hand" ToolTip="Minimized"
+                                    Command="{Binding MinimizedApp}">
+                                <Image Source="{StaticResource minimi_icon}"/>
+                            </Button>
+                            <Button x:Name="SysSettingsBtn" Style="{StaticResource ButtonStyle}"
+                                    Background="Transparent" Height="25" Width="25" 
+                                    HorizontalAlignment="Right" Margin="10 0 5 0"
+                                    Cursor="Hand" ToolTip="Settings"
+                                    Command="{Binding ActivPegeSettingsCommand}">
+                                <Image Source="{StaticResource settings_outline_icon}"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding DragWindow}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region Status Bar-->
+            <Grid x:Name="StatusBar" Height="20"
+                  DockPanel.Dock="Bottom"
+                  Background="#FF161D23">
+                <Border BorderThickness="0 1 0 0" BorderBrush="#2F3644">
+
+                </Border>
+            </Grid>
+            <!--#endregion-->
+            
+            <!--Background="#FF1F2025"-->
+            <Grid x:Name="FrameBox" Background="#FF1F2025">
+                <!--<Grid.Background>
+                    <LinearGradientBrush StartPoint="0.6,0" EndPoint="0.5,1">
+                        <GradientStop Color="#1D2062" Offset="0.5" />
+                        <GradientStop Color="#7A1162" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Grid.Background>-->
+                <Frame Source="{Binding PagesSource}" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2"/>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>

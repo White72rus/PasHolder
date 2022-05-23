@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="PassHolder.View.Windows.Login.Login"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PassHolder.View.Windows.Login"
+             xmlns:vm="clr-namespace:PassHolder.ViewModel.Login" 
+             xmlns:convert="clr-namespace:PassHolder.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="400">
+    
+    <UserControl.DataContext>
+        <vm:LoginViewModel/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <convert:SecureStringConverter x:Key="SecureStringConverter"/>
+    </UserControl.Resources>
+
+    <Border BorderBrush="#333333" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="tBoxLogin" Style="{DynamicResource MainTextBoxStyle}"
+                 Grid.Row="1"
+                 Height="50"
+                 Margin="40 0" TextChanged="OnChangedLoginBox"/>
+
+            <PasswordBox x:Name="tBoxPass" Style="{DynamicResource MainPasswordBoxStyle}"
+                 Grid.Row="2"
+                 Height="50"
+                 Margin="40 0" PasswordChanged="OnChangedPasswordBox"/>
+
+            <Button x:Name="btnLogin" Grid.Row="3" Style="{StaticResource BtnCaptionStyle}"
+                Height="50" Width="100"
+                FontSize="20"
+                Content="Login"
+                Command="{Binding LoginCommand}"/>
+        </Grid>
+    </Border>
+</UserControl>

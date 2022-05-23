@@ -1,0 +1,149 @@
+﻿<Page x:Class="PassHolder.View.Pages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PassHolder.View.Pages"
+      xmlns:vm="clr-namespace:PassHolder.ViewModel.PagesViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainPage" FontSize="{Binding BaseFontSize}">
+    <Page.DataContext>
+        <vm:MainPageViewModel/>
+    </Page.DataContext>
+
+    <Grid>
+        <DockPanel x:Name="MainFrame">
+
+            <!--#region Left side Menu-->
+            <Grid x:Name="LeftMenu" Width="50" Visibility="Visible"
+                          DockPanel.Dock="Left"
+                          Background="{StaticResource Base.Panel.Color}">
+                <Button x:Name="homeIcon" Style="{StaticResource ButtonStyle}"
+                                Width="35" Height="35" 
+                                Margin="8,10,7,0" VerticalAlignment="Top"
+                                Cursor="Hand">
+                    <Image Width="30" Height="30"
+                                   Source="{StaticResource homeIcon}"/>
+                </Button>
+            </Grid>
+            <!--#endregion-->
+
+            <StackPanel Orientation="Vertical">
+
+                <!--#region Comment-->
+                <!--<ItemsControl ItemsSource="{Binding PanelItam}">
+
+                            <ItemsControl.ItemContainerStyle>
+                                <Style>
+                                    <Setter Property="FrameworkElement.Margin" Value="10"/>
+                                    <Setter Property="FrameworkElement.Cursor" Value="Hand"/>
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
+
+                        </ItemsControl>-->
+
+                <!--<ListView x:Name="MainListView" ItemsSource="{Binding PanelItam}" 
+                                  HorizontalContentAlignment="Stretch" 
+                                  VerticalContentAlignment="Stretch"
+                                  Background="Transparent">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding ListItemClick}" 
+                                                           CommandParameter="{Binding ElementName=MainListView, Path=SelectedIndex}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </ListView>-->
+                <!--#endregion-->
+
+                <ListBox x:Name="ListBoxItem" ItemsSource="{Binding PanelItam}" 
+                                 Background="Transparent"
+                                 HorizontalContentAlignment="Stretch">
+                <!--#region ItemTemplate-->
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <Border BorderBrush="#333333" BorderThickness="0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*" MaxWidth="400"/>
+                                            <ColumnDefinition Width="2*" MaxWidth="180"/>
+                                            <ColumnDefinition Width="40"/>
+                                            <ColumnDefinition Width="2*" MaxWidth="180"/>
+                                            <ColumnDefinition Width="40"/>
+                                            <ColumnDefinition Width="2*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock x:Name="AppNameLabel" Grid.Column="0"
+                                                           Style="{StaticResource TextBlockTailStyle}"
+                                                           Text="{Binding AppName}"/>
+
+                                        <TextBox x:Name="AppLoginInput" Grid.Column="1"
+                                                         Style="{StaticResource TextBoxTailStyle}"
+                                                         Text="{Binding AppLogin}" MinWidth="150"/>
+
+                                        <PasswordBox x:Name="AppPassInput" Grid.Column="3"
+                                                         Style="{StaticResource PasswordBoxTailStyle}"
+                                                         Password="123" MinWidth="150"/>
+
+                                        <TextBlock x:Name="AppUrlLabel" Grid.Column="5"
+                                                           Style="{StaticResource TextBlockTailStyle}"
+                                                           Text="{Binding AppUrl}"/>
+
+                                        <Button x:Name="LoginBtn" Grid.Column="2" 
+                                                        Style="{StaticResource ButtonTailStyle}"
+                                                        Command="{Binding CommandCopyLogin}" 
+                                                        CommandParameter="{Binding ElementName=AppNameLabel, Path=Text}">
+                                            <Image Source="{StaticResource copy_icon}" Width="20"/>
+                                        </Button>
+
+                                        <Button Grid.Column="4" Style="{StaticResource ButtonTailStyle}"
+                                                        Command="{Binding CommandCopyPass}" 
+                                                        CommandParameter="{Binding ElementName=AppNameLabel, Path=Text}">
+                                            <Image Source="{StaticResource copy_icon}" Width="20"/>
+                                        </Button>
+
+                                        <Grid.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="Item-1"/>
+                                                <MenuItem Header="Item-2"/>
+                                                <MenuItem Header="Item-3"/>
+                                                <MenuItem Header="Item-4"/>
+                                            </ContextMenu>
+                                        </Grid.ContextMenu>
+
+                                    </Grid>
+                                </Border>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                <!--#endregion-->
+                    
+                </ListBox>
+
+                <Label Content="{Binding SelectedIndex, ElementName=ListBoxItem, Mode=OneWay}"/>
+                
+            </StackPanel>
+        </DockPanel>
+
+        <!--#region ButtonAddNewTaill -->
+        <Button Style="{StaticResource ButtonAddNewTaillStyle}" Width="40" Height="40"
+                        Background="{StaticResource Button.Add.Color}"
+                        Margin="0,0,11,13" 
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Bottom"
+                        Cursor="Hand"
+                        Command="{Binding AddNewTailCommand}">
+            <Image Width="20" Height="20"
+                                   Source="{StaticResource add_icon}"/>
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0" 
+                                  Opacity="1" Color="{StaticResource Base.Gean}" 
+                                  RenderingBias="Performance"/>
+            </Button.Effect>
+        </Button>
+        <!--#endregion-->
+
+    </Grid>
+</Page>

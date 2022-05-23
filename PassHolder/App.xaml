@@ -1,0 +1,27 @@
+﻿<Application x:Class="PassHolder.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:PassHolder"
+             xmlns:vm="clr-namespace:PassHolder.ViewModel.Login"
+             xmlns:v="clr-namespace:PassHolder.View.Windows.Login"
+             StartupUri="View/Windows/MainWindow.xaml"
+             ShutdownMode="OnMainWindowClose">
+
+    <!--"View/Windows/Login/LoginWindow.xaml"-->
+
+    <Application.Resources>
+        
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/AppResources.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/BaseStyles.xaml"/>
+                <ResourceDictionary Source="Assets/Icons/Icons.xaml"/>
+                <ResourceDictionary Source="Assets/Styles/ButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        
+        
+    </Application.Resources>
+    
+</Application>

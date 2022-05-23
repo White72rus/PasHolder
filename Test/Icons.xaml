@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <SolidColorBrush x:Key="Icon.Color" Color="#68BB86"/>
+    
+    <DrawingImage x:Key="copy_icon">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                <GeometryDrawing>
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="{StaticResource Icon.Color}" Thickness="32" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Round" />
+                    </GeometryDrawing.Pen>
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry RadiusX="57" RadiusY="57" Rect="128,128,336,336" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <GeometryDrawing Geometry="F1 M512,512z M0,0z M383.5,128L384,104A56.16,56.16,0,0,0,328,48L112,48A64.19,64.19,0,0,0,48,112L48,328A56.16,56.16,0,0,0,104,384L128,384">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="{StaticResource Icon.Color}" Thickness="32" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+</ResourceDictionary>

@@ -1,0 +1,24 @@
+﻿<Page x:Class="PassHolder.View.Pages.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PassHolder.View.Pages" 
+      xmlns:vm="clr-namespace:PassHolder.ViewModel.PagesViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SettingsPage" FontSize="20">
+    <Page.DataContext>
+        <vm:SettingsPageViewModel/>
+    </Page.DataContext>
+
+    <Grid>
+        <Button x:Name="OkBtn" Style="{StaticResource ButtonStyle}" 
+                Height="50" Width="100"
+                Content="Ok" Margin="10"
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom" 
+                Background="Transparent" 
+                Foreground="#AAAAAA" Command="{Binding OkCommand}"/>
+    </Grid>
+</Page>
